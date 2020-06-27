@@ -13,4 +13,223 @@
   <wf-editor style="width: 300px; height: 300px;" ></wf-editor>
 
 </body>
+<script>
+var data = {
+  "Status": {
+    "Start": {
+      "Actors": [
+        "User"
+      ],
+      "Actions": [
+        {
+          "Name": "Save",
+          "Actors": [
+            "User"
+          ],
+          "Events": [
+            {
+              "Name": "CreateRequest",
+              "Order": "1"
+            }
+          ],
+          "Options": {
+            "Tags": [
+            ],
+            "style": "Default"
+          },
+          "ToStatus": "Draft"
+        },
+        {
+          "Name": "Submit",
+          "Actors": [
+            "User"
+          ],
+          "Events": [
+            {
+              "Name": "CreateRequest",
+              "Order": "1"
+            },
+            {
+              "Name": "SendEmail",
+              "Order": "2"
+            }
+          ],
+          "Options": {
+            "Tags": [
+              "RequiresValidation"
+            ],
+            "style": "Success"
+          },
+          "ToStatus": "Submitted"
+        }
+      ],
+      "Options": {
+        "code": "STR",
+        "style": "Default"
+      }
+    },
+    "Draft": {
+      "Actors": [
+        "User"
+      ],
+      "Actions": [
+        {
+          "Name": "Save",
+          "Actors": [
+            "User"
+          ],
+          "Events": [
+            {
+              "Name": "UpdateRequest",
+              "Order": "1"
+            }
+          ],
+          "Options": {
+            "Tags": [
+            ],
+            "style": "Default"
+          },
+          "ToStatus": "Draft"
+        },
+        {
+          "Name": "Submit",
+          "Actors": [
+            "User"
+          ],
+          "Events": [
+            {
+              "Name": "UpdateRequest",
+              "Order": "1"
+            },
+            {
+              "Name": "SendEmail",
+              "Order": "1"
+            }
+          ],
+          "Options": {
+            "Tags": [
+              "RequiresValidation"
+            ],
+            "style": "Success"
+          },
+          "ToStatus": "Submitted"
+        }
+      ],
+      "Options": {
+        "code": "DFT",
+        "style": "Default"
+      }
+    },
+    "Submitted": {
+      "Actors": [
+        "User",
+        "Verifier"
+      ],
+      "Actions": [
+        {
+          "Name": "Return",
+          "Actors": [
+            "Verifier"
+          ],
+          "Events": [
+          ],
+          "Options": {
+            "Tags": [
+              "RequiresComment"
+            ],
+            "style": "Warn"
+          },
+          "ToStatus": "Draft"
+        },
+        {
+          "Name": "Verify",
+          "Actors": [
+            "Verifier"
+          ],
+          "Events": [
+          ],
+          "Options": {
+            "Tags": [
+            ],
+            "style": "Success"
+          },
+          "ToStatus": "Verified"
+        }
+      ],
+      "Options": {
+        "code": "SMD",
+        "style": "Success"
+      }
+    },
+    "Verified": {
+      "Actors": [
+        "User",
+        "Verifier",
+        "Approver"
+      ],
+      "Actions": [
+        {
+          "Name": "Approve",
+          "Actors": [
+            "Approver"
+          ],
+          "Events": [
+          ],
+          "Options": {
+            "Tags": [
+            ],
+            "style": "Success"
+          },
+          "ToStatus": "Approved"
+        },
+        {
+          "Name": "Reject",
+          "Actors": [
+            "Approver"
+          ],
+          "Events": [
+          ],
+          "Options": {
+            "Tags": [
+              "RequiresComment"
+            ],
+            "style": "Danger"
+          },
+          "ToStatus": "Rejected"
+        }
+      ],
+      "Options": {
+        "code": "VFD",
+        "style": "Default"
+      }
+    },
+    "Approved": {
+      "Actors": [
+        "User",
+        "Verifier",
+        "Approver"
+      ],
+      "Actions": [
+      ],
+      "Options": {
+        "code": "APD",
+        "style": "Success"
+      }
+    },
+    "Rejected": {
+      "Actors": [
+        "User",
+        "Verifier",
+        "Approver"
+      ],
+      "Actions": [
+      ],
+      "Options": {
+        "code": "RJD",
+        "style": "Danger"
+      }
+    }
+  }
+}
+</script>
 </html>
